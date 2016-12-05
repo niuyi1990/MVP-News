@@ -17,8 +17,8 @@ public class GlideImageLoader {
         Glide
                 .with(context)
                 .load(path)
-                .placeholder(R.mipmap.ic_launcher) // 占位图
-                .error(R.mipmap.ic_launcher) // 加载错误图
+                .placeholder(R.mipmap.zhanwei) // 占位图
+                .error(R.mipmap.shibao) // 加载错误图
                 .into(imageView);
     }
 }
