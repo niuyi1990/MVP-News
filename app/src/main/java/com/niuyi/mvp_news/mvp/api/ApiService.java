@@ -3,6 +3,7 @@ package com.niuyi.mvp_news.mvp.api;
 import com.niuyi.mvp_news.bean.DomesticNewsBean;
 import com.niuyi.mvp_news.bean.InternationalNewsBean;
 import com.niuyi.mvp_news.bean.SocietyNewsBean;
+import com.niuyi.mvp_news.bean.TentertainmentNewsBean;
 import com.niuyi.mvp_news.bean.TopNewsBean;
 
 import retrofit2.http.GET;
@@ -28,7 +29,7 @@ public interface ApiService {
     @GET("index")
     Observable<InternationalNewsBean> getInternationalNews(@Query("type") String type, @Query("key") String key);
 
-//    @GET("social/")
-//    Observable<SocietyNewsBean> getSocietyNews(@Query("page") String page, @Query("num") String num, @Query("key") String key);
+    @GET("index")
+    Observable<TentertainmentNewsBean> getTentertainmentNews(@Query("type") String type, @Query("key") String key);
 
 }

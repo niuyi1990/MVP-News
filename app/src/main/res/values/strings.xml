@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">新闻客户端</string>
+    <string name="loading_fail">加载失败</string>
 </resources>

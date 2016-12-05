@@ -29,7 +29,7 @@
         </activity>
         <activity
             android:name=".ui.activity.PhotoViewActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar.Fullscreeen">
         </activity>
     </application>
 
