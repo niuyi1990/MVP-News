@@ -24,8 +24,6 @@ import butterknife.BindView;
 
 public class FragmentMainOne extends BaseFragment {
 
-
-
     @BindView(R.id.tab_news)
     TabLayout mTabNews;
     @BindView(R.id.vp_news_pager)
