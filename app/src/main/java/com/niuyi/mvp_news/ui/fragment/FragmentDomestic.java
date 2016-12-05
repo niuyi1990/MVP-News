@@ -53,7 +53,7 @@ public class FragmentDomestic extends BaseFragment<DomesticPresenter> implements
 
     @Override
     protected void initView(View view) {
-
+        mSwipeLayout.setColorSchemeResources(android.R.color.holo_orange_dark);
     }
 
     @Override

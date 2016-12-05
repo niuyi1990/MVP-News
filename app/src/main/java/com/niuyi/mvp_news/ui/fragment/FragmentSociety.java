@@ -54,6 +54,7 @@ public class FragmentSociety extends BaseFragment<SocietyPresenter> implements S
 
     @Override
     protected void initView(View view) {
+        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright);
     }
 
     @Override

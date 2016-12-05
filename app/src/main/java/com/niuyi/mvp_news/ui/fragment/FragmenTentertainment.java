@@ -54,7 +54,7 @@ public class FragmenTentertainment extends BaseFragment<TentertainmentPresenter>
 
     @Override
     protected void initView(View view) {
-
+        mSwipeLayout.setColorSchemeResources(android.R.color.holo_purple);
     }
 
     @Override

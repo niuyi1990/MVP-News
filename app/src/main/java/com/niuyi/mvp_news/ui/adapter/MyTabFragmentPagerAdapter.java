@@ -4,17 +4,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.niuyi.mvp_news.constant.Constant;
+
 import java.util.List;
 
-/**
- * Created by HongJay on 2016/8/11.
- */
+
 public class MyTabFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private String mTitles[] = new String[]{"头条", "社会", "国内", "国外", "娱乐", "体育", "军事", "科技", "财经", "时尚"};
     private List<Fragment> mFragmentList;
 
-    public MyTabFragmentPagerAdapter(FragmentManager supportFragmentManager,List<Fragment> list) {
+    public MyTabFragmentPagerAdapter(FragmentManager supportFragmentManager, List<Fragment> list) {
         super(supportFragmentManager);
         mFragmentList = list;
     }
@@ -26,12 +25,12 @@ public class MyTabFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return mTitles.length;
+        return Constant.mTitles.length;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mTitles[position];
+        return Constant.mTitles[position];
     }
 
 }

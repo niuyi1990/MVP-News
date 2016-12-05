@@ -55,6 +55,7 @@ public class FragmentTop extends BaseFragment<TopPresenter> implements TopContra
 
     @Override
     protected void initView(View view) {
+        mSwipeLayout.setColorSchemeResources(android.R.color.holo_red_light);
     }
 
     @Override

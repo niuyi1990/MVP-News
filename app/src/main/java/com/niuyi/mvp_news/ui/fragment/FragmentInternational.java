@@ -53,7 +53,7 @@ public class FragmentInternational extends BaseFragment<InternationalPresenter> 
 
     @Override
     protected void initView(View view) {
-
+        mSwipeLayout.setColorSchemeResources(android.R.color.holo_green_dark);
     }
 
     @Override

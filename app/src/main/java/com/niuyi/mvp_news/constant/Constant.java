@@ -19,4 +19,6 @@ public class Constant {
     public static final String IMAGES_PATH = SHISHIBAO_PATH + "images/";
     public static final String CACHE_PATH = SHISHIBAO_PATH + "cache/";
 
+    public static String mTitles[] = new String[]{"头条", "社会", "国内", "国外", "娱乐", "体育", "军事", "科技", "财经", "时尚"};
+
 }
