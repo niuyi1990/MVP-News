@@ -18,8 +18,7 @@ import android.widget.TextView;
 import com.niuyi.mvp_news.R;
 import com.niuyi.mvp_news.base.BaseFragment;
 import com.niuyi.mvp_news.base.BasePresenter;
-import com.niuyi.mvp_news.constant.Constant;
-import com.niuyi.mvp_news.ui.adapter.MyTabFragmentPagerAdapter;
+import com.niuyi.mvp_news.ui.adapter.TabFragmentPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +40,8 @@ public class FragmentMainOne extends BaseFragment {
     ViewPager mVpNewsPager;
     @BindView(R.id.rl_more)
     RelativeLayout mRlMore;
+
+    String mTitles[] = new String[]{"头条", "社会", "国内", "国外", "娱乐", "体育", "军事", "科技", "财经", "时尚"};
 
     public static FragmentMainOne newInstance() {
         Bundle args = new Bundle();
@@ -84,6 +85,26 @@ public class FragmentMainOne extends BaseFragment {
         showPop();
     }
 
+    private void initTab() {
+        List<Fragment> fragmentList = new ArrayList<>();
+
+        fragmentList.add(FragmentTop.newInstance());
+        fragmentList.add(FragmentSociety.newInstance());
+        fragmentList.add(FragmentDomestic.newInstance());
+        fragmentList.add(FragmentInternational.newInstance());
+        fragmentList.add(FragmenTentertainment.newInstance());
+        fragmentList.add(FragmenSports.newInstance());
+        fragmentList.add(FragmenMilitary.newInstance());
+        fragmentList.add(FragmenTech.newInstance());
+        fragmentList.add(FragmenFinancial.newInstance());
+        fragmentList.add(FragmenFashion.newInstance());
+
+        TabFragmentPagerAdapter mTabFragmentPagerAdapter = new TabFragmentPagerAdapter(
+                getActivity().getSupportFragmentManager(), fragmentList, mTitles);
+        mVpNewsPager.setAdapter(mTabFragmentPagerAdapter);
+        mTabNews.setupWithViewPager(mVpNewsPager);
+    }
+
     private void showPop() {
         // 一个自定义的布局，作为显示的内容
         View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.pop_news, null);
@@ -109,31 +130,11 @@ public class FragmentMainOne extends BaseFragment {
         popupWindow.showAsDropDown(mTabNews);// 设置好参数之后再show
     }
 
-    private void initTab() {
-        List<Fragment> fragmentList = new ArrayList<>();
-
-        fragmentList.add(FragmentTop.newInstance());
-        fragmentList.add(FragmentSociety.newInstance());
-        fragmentList.add(FragmentDomestic.newInstance());
-        fragmentList.add(FragmentInternational.newInstance());
-        fragmentList.add(FragmenTentertainment.newInstance());
-        fragmentList.add(FragmenSports.newInstance());
-        fragmentList.add(FragmenMilitary.newInstance());
-        fragmentList.add(FragmenTech.newInstance());
-        fragmentList.add(FragmenFinancial.newInstance());
-        fragmentList.add(FragmenFashion.newInstance());
-
-        MyTabFragmentPagerAdapter mMyTabFragmentPagerAdapter = new MyTabFragmentPagerAdapter(
-                getActivity().getSupportFragmentManager(), fragmentList);
-        mVpNewsPager.setAdapter(mMyTabFragmentPagerAdapter);
-        mTabNews.setupWithViewPager(mVpNewsPager);
-    }
-
     class PopAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {//这里先写死
-            return Constant.mTitles.length;
+            return mTitles.length;
         }
 
         @Override
@@ -152,7 +153,7 @@ public class FragmentMainOne extends BaseFragment {
                 convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pop_news, parent, false);
             }
 
-            new ViewHolder(convertView).mTextview.setText(Constant.mTitles[position]);
+            new ViewHolder(convertView).mTextview.setText(mTitles[position]);
             return convertView;
         }
 

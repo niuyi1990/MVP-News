@@ -4,18 +4,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.niuyi.mvp_news.constant.Constant;
-
 import java.util.List;
 
 
-public class MyTabFragmentPagerAdapter extends FragmentPagerAdapter {
+public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> mFragmentList;
 
-    public MyTabFragmentPagerAdapter(FragmentManager supportFragmentManager, List<Fragment> list) {
+    private String[] mTitles;
+
+    public TabFragmentPagerAdapter(FragmentManager supportFragmentManager, List<Fragment> list, String[] titles) {
         super(supportFragmentManager);
         mFragmentList = list;
+        mTitles = titles;
     }
 
     @Override
@@ -25,12 +26,12 @@ public class MyTabFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return Constant.mTitles.length;
+        return mTitles.length;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return Constant.mTitles[position];
+        return mTitles[position];
     }
 
 }
