@@ -5,6 +5,8 @@ import com.niuyi.mvp_news.base.BasePresenter;
 import com.niuyi.mvp_news.base.BaseView;
 import com.niuyi.mvp_news.bean.FunnyJokeBean;
 
+import java.util.List;
+
 import rx.Observable;
 
 /**
@@ -16,25 +18,31 @@ public interface JokeContract {
 
     interface View extends BaseView {
 
-        void showDialog();
+        void showRefreshDialog();
 
-        void onSucceed(FunnyJokeBean funnyJokeBean);
+        void hideRefreshDialog();
 
-        void onFail(String err);
+        void onRefreshSucceed(List<FunnyJokeBean.ResultBean.DataBean> data);
 
-        void hideDialog();
+        void onRefreshFail(String err);
+
+        void onLoadMoreSucceed(List<FunnyJokeBean.ResultBean.DataBean> data);
+
+        void onLoadMoreFail(String err);
 
     }
 
     interface Model extends BaseModel {
-        Observable<FunnyJokeBean> getFunnyJoke();
+        Observable<FunnyJokeBean> getFunnyJoke(int page);
+
+        void setPage(int page);
     }
 
     abstract class Presenter extends BasePresenter<View, Model> {
-        public abstract void getFunnyJoke();
+        public abstract void getFunnyJoke(int page);
 
         public abstract void refresh();
 
-        public abstract void loadmore();
+        public abstract void loadmore(int page);
     }
 }

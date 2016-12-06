@@ -3,7 +3,6 @@ package com.niuyi.mvp_news.mvp.presenter;
 import com.niuyi.mvp_news.bean.FunnyJokeBean;
 import com.niuyi.mvp_news.mvp.contract.JokeContract;
 import com.niuyi.mvp_news.mvp.model.JokeModel;
-import com.orhanobut.logger.Logger;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -14,38 +13,43 @@ import rx.Subscription;
  */
 public class JokePresenter extends JokeContract.Presenter {
 
-
     public JokePresenter(JokeContract.View view) {
         mView = view;
         mModel = new JokeModel();
     }
 
     @Override
-    public void getFunnyJoke() {
+    public void getFunnyJoke(final int page) {
 
-        Subscription subscription = mModel.getFunnyJoke()
+        Subscription subscription = mModel.getFunnyJoke(page)
                 .subscribe(new Subscriber<FunnyJokeBean>() {
                     @Override
                     public void onStart() {
-                        mView.showDialog();
+                        if (page == 1) mView.showRefreshDialog();//下拉刷新
                     }
 
                     @Override
                     public void onCompleted() {
-                        mView.hideDialog();
+                        if (page == 1) mView.hideRefreshDialog();//下拉刷新
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        mView.onFail(e.getMessage());
+                        if (page == 1) {//下拉刷新
+                            mView.onRefreshFail(e.getMessage());
+                        } else {
+                            mView.onLoadMoreFail(e.getMessage());
+                        }
                         onCompleted();
-                        Logger.e("e===" + e.getMessage());
                     }
 
                     @Override
                     public void onNext(FunnyJokeBean funnyJokeBean) {
-                        mView.onSucceed(funnyJokeBean);
-                        Logger.e("funnyJokeBean==" + funnyJokeBean.getResult().getData().size());
+                        if (page == 1) {//下拉刷新
+                            mView.onRefreshSucceed(funnyJokeBean.getResult().getData());
+                        } else {
+                            mView.onLoadMoreSucceed(funnyJokeBean.getResult().getData());
+                        }
                     }
                 });
 
@@ -54,11 +58,12 @@ public class JokePresenter extends JokeContract.Presenter {
 
     @Override
     public void refresh() {
-        getFunnyJoke();
+        getFunnyJoke(1);//下来刷新加载第一页
     }
 
     @Override
-    public void loadmore() {
-
+    public void loadmore(int page) {
+        mModel.setPage(page);
+        getFunnyJoke(page);
     }
 }

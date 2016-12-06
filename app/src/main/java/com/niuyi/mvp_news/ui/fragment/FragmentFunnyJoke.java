@@ -3,15 +3,21 @@ package com.niuyi.mvp_news.ui.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.niuyi.mvp_news.R;
 import com.niuyi.mvp_news.base.BaseFragment;
 import com.niuyi.mvp_news.bean.FunnyJokeBean;
 import com.niuyi.mvp_news.mvp.contract.JokeContract;
 import com.niuyi.mvp_news.mvp.presenter.JokePresenter;
+import com.niuyi.mvp_news.ui.adapter.FunnyJokeAdapter;
 import com.niuyi.mvp_news.utils.ToastUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -20,12 +26,17 @@ import butterknife.BindView;
  * 邮箱：niuyi19900923@hotmail.com
  */
 public class FragmentFunnyJoke extends BaseFragment<JokePresenter> implements JokeContract.View,
-        SwipeRefreshLayout.OnRefreshListener {
+        SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
 
     @BindView(R.id.rv_funny_joke)
     RecyclerView mRvFunnyJoke;
     @BindView(R.id.swipeLayout)
     SwipeRefreshLayout mSwipeLayout;
+
+    private int page = 2;//上拉加载从当前二页开始
+
+    private List<FunnyJokeBean.ResultBean.DataBean> mList = new ArrayList<>();
+    private FunnyJokeAdapter mQuickAdapter;
 
     public static FragmentFunnyJoke newInstance() {
         Bundle args = new Bundle();
@@ -51,7 +62,7 @@ public class FragmentFunnyJoke extends BaseFragment<JokePresenter> implements Jo
 
     @Override
     protected void toDo(Context mContext) {
-        mPresenter.getFunnyJoke();
+        mPresenter.refresh();
     }
 
     @Override
@@ -65,27 +76,60 @@ public class FragmentFunnyJoke extends BaseFragment<JokePresenter> implements Jo
     }
 
     @Override
-    public void showDialog() {
+    public void showRefreshDialog() {
         mSwipeLayout.setRefreshing(true);
     }
 
     @Override
-    public void onSucceed(FunnyJokeBean funnyJokeBean) {
-
+    public void onRefreshSucceed(List<FunnyJokeBean.ResultBean.DataBean> data) {
+        page = 2;//下来刷新成功，初始化为第一页
+        mList = data;
+        if (mQuickAdapter == null) {
+            initFunnyJokeView();
+        } else {
+            mQuickAdapter.setNewData(data);
+        }
     }
 
     @Override
-    public void onFail(String err) {
+    public void onRefreshFail(String err) {
         ToastUtil.showToast(getActivity(), getString(R.string.loading_fail));
     }
 
     @Override
-    public void hideDialog() {
+    public void onLoadMoreSucceed(List<FunnyJokeBean.ResultBean.DataBean> data) {
+        mQuickAdapter.addData(data);
+        mQuickAdapter.loadMoreComplete();
+        page++;
+    }
+
+    @Override
+    public void onLoadMoreFail(String err) {
+        mQuickAdapter.loadMoreFail();
+        ToastUtil.showToast(getActivity(), getString(R.string.loading_fail));
+    }
+
+    @Override
+    public void hideRefreshDialog() {
         mSwipeLayout.setRefreshing(false);
     }
 
     @Override
     public void onRefresh() {
         mPresenter.refresh();
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+        mPresenter.loadmore(page);
+    }
+
+    private void initFunnyJokeView() {
+        mQuickAdapter = new FunnyJokeAdapter(mList);
+        mQuickAdapter.setOnLoadMoreListener(this);
+        mQuickAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
+//        mQuickAdapter.setAutoLoadMoreSize(3);//距离底布多少item预加载
+        mRvFunnyJoke.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRvFunnyJoke.setAdapter(mQuickAdapter);
     }
 }

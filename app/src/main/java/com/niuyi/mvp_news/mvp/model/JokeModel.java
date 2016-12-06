@@ -12,16 +12,20 @@ import rx.Observable;
  * 作者：${牛毅} on 2016/12/6 11:37
  * 邮箱：niuyi19900923@hotmail.com
  */
-
 public class JokeModel implements JokeContract.Model {
 
     @Override
-    public Observable<FunnyJokeBean> getFunnyJoke() {
+    public Observable<FunnyJokeBean> getFunnyJoke(int page) {
         return ApiEngine
                 .getInstance(Constant.FUNNY_BASE_URL_TYPE)
                 .getApiService()
-                .getFunnyJokeData("1", "10", Constant.FUNNY_KEY)
+                .getFunnyJokeData(String.valueOf(page), "10", Constant.FUNNY_KEY)
                 .compose(RxSchedulers.<FunnyJokeBean>switchThread());
+    }
+
+    @Override
+    public void setPage(int page) {
+        getFunnyJoke(page);
     }
 
 }
