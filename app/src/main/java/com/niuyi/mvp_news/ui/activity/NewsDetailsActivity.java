@@ -37,6 +37,8 @@ public class NewsDetailsActivity extends AppCompatActivity {
 
         String url = getIntent().getStringExtra("url");
 
+//        mWebview.getSettings().setJavaScriptEnabled(true);
+
         mWebview.setWebViewClient(new MyWebViewClient());
 
         mWebview.loadUrl(url);

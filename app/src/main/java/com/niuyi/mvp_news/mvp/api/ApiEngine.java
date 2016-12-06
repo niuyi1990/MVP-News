@@ -19,9 +19,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiEngine {
 
     private volatile static ApiEngine apiEngine;
+    private String mBaseUrl;
     private Retrofit retrofit;
 
-    private ApiEngine() {
+    private ApiEngine(int type) {//type用来区分url
         //日志拦截器
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(MyApplication.mLogLevel);
@@ -40,23 +41,36 @@ public class ApiEngine {
                 .cache(cache)
                 .build();
 
+        switch (type) {
+            case 1://新闻
+                mBaseUrl = Constant.NEWS_BASE_URL;
+                break;
+            case 2://段子
+                mBaseUrl = Constant.FUNNY_BASE_URL;
+                break;
+            case 3://电影
+
+                break;
+        }
+
         retrofit = new Retrofit.Builder()
-                .baseUrl(Constant.BASE_URL)
+                .baseUrl(mBaseUrl)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
     }
 
-    public static ApiEngine getInstance() {
-        if (apiEngine == null) {
-            synchronized (ApiEngine.class) {
-                if (apiEngine == null) {
-                    apiEngine = new ApiEngine();
-                }
-            }
-        }
-        return apiEngine;
+    public static ApiEngine getInstance(int type) {
+//        if (apiEngine == null) {
+//            synchronized (ApiEngine.class) {
+//                if (apiEngine == null) {
+//                    apiEngine = new ApiEngine(type);
+//                }
+//            }
+//        }
+//        return apiEngine;
+        return new ApiEngine(type);
     }
 
     public ApiService getApiService() {

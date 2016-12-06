@@ -17,9 +17,9 @@ public class TentertainmentModel implements TentertainmentContract.Model {
     @Override
     public Observable<TentertainmentNewsBean> getTentertainmentData() {
         return ApiEngine
-                .getInstance()
+                .getInstance(Constant.NEWS_BASE_URL_TYPE)
                 .getApiService()
-                .getTentertainmentNews("yule", Constant.urlKey)
+                .getTentertainmentNews("yule", Constant.NEWS_KEY)
                 .compose(RxSchedulers.<TentertainmentNewsBean>switchThread());
     }
 }

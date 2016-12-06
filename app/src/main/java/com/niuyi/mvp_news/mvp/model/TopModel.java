@@ -20,9 +20,9 @@ public class TopModel implements TopContract.Model {
     @Override
     public Observable<TopNewsBean> getTopNews() {
         return ApiEngine
-                .getInstance()
+                .getInstance(Constant.NEWS_BASE_URL_TYPE)
                 .getApiService()
-                .getTopNews("top", Constant.urlKey)
+                .getTopNews("top", Constant.NEWS_KEY)
                 .compose(RxSchedulers.<TopNewsBean>switchThread());
     }
 

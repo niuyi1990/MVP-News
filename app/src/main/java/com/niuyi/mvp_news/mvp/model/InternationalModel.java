@@ -18,9 +18,9 @@ public class InternationalModel implements InternationalContract.Model {
     @Override
     public Observable<InternationalNewsBean> getInternationData() {
         return ApiEngine
-                .getInstance()
+                .getInstance(Constant.NEWS_BASE_URL_TYPE)
                 .getApiService()
-                .getInternationalNews("guoji", Constant.urlKey)
+                .getInternationalNews("guoji", Constant.NEWS_KEY)
                 .compose(RxSchedulers.<InternationalNewsBean>switchThread());
     }
 }

@@ -17,9 +17,9 @@ public class DomesticModel implements DomesticContract.Model {
     @Override
     public Observable<DomesticNewsBean> getDomesticDate() {
         return ApiEngine
-                .getInstance()
+                .getInstance(Constant.NEWS_BASE_URL_TYPE)
                 .getApiService()
-                .getDomesticNews("guonei", Constant.urlKey)
+                .getDomesticNews("guonei", Constant.NEWS_KEY)
                 .compose(RxSchedulers.<DomesticNewsBean>switchThread());
     }
 }

@@ -17,9 +17,9 @@ public class SocietyModel implements SocietyContract.Model {
     @Override
     public Observable<SocietyNewsBean> getSocietyNews() {
         return ApiEngine
-                .getInstance()
+                .getInstance(Constant.NEWS_BASE_URL_TYPE)
                 .getApiService()
-                .getSocietyNews("shehui", Constant.urlKey)
+                .getSocietyNews("shehui", Constant.NEWS_KEY)
                 .compose(RxSchedulers.<SocietyNewsBean>switchThread());
     }
 }

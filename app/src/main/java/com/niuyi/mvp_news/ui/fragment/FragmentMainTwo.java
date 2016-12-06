@@ -71,8 +71,8 @@ public class FragmentMainTwo extends BaseFragment {
     private void initTab() {
         List<Fragment> fragmentList = new ArrayList<>();
 
-        fragmentList.add(FragmentTop.newInstance());
-        fragmentList.add(FragmentSociety.newInstance());
+        fragmentList.add(FragmentFunnyJoke.newInstance());
+        fragmentList.add(FragmentFunnyPictures.newInstance());
 
         TabFragmentPagerAdapter mTabFragmentPagerAdapter = new TabFragmentPagerAdapter(
                 getActivity().getSupportFragmentManager(), fragmentList, mTitles);

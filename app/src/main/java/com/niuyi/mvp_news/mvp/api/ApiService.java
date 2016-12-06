@@ -1,6 +1,7 @@
 package com.niuyi.mvp_news.mvp.api;
 
 import com.niuyi.mvp_news.bean.DomesticNewsBean;
+import com.niuyi.mvp_news.bean.FunnyJokeBean;
 import com.niuyi.mvp_news.bean.InternationalNewsBean;
 import com.niuyi.mvp_news.bean.SocietyNewsBean;
 import com.niuyi.mvp_news.bean.TentertainmentNewsBean;
@@ -31,5 +32,8 @@ public interface ApiService {
 
     @GET("index")
     Observable<TentertainmentNewsBean> getTentertainmentNews(@Query("type") String type, @Query("key") String key);
+
+    @GET("content/text.from")
+    Observable<FunnyJokeBean> getFunnyJokeData(@Query("page") String page,@Query("pagesize") String pagesize, @Query("key") String key);
 
 }
