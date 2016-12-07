@@ -1,6 +1,7 @@
 package com.niuyi.mvp_news.ui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,11 +10,13 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.niuyi.mvp_news.R;
 import com.niuyi.mvp_news.base.BaseFragment;
 import com.niuyi.mvp_news.bean.SportsNewsBean;
 import com.niuyi.mvp_news.mvp.contract.SportsContract;
 import com.niuyi.mvp_news.mvp.presenter.SportsPresenter;
+import com.niuyi.mvp_news.ui.activity.NewsDetailsActivity;
 import com.niuyi.mvp_news.ui.adapter.NewsSportsAdapter;
 import com.niuyi.mvp_news.ui.widght.RecycleViewDivider;
 import com.niuyi.mvp_news.utils.DensityUtils;
@@ -103,7 +106,7 @@ public class FragmenNewsSports extends BaseFragment<SportsPresenter> implements 
         mSwipeLayout.setRefreshing(false);
     }
 
-    private void initSportsView(List<SportsNewsBean.ResultBean.DataBean> list) {
+    private void initSportsView(final List<SportsNewsBean.ResultBean.DataBean> list) {
         mNewsSportsAdapter = new NewsSportsAdapter(list);
         mNewsSportsAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
         mRvSportsNews.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -111,5 +114,14 @@ public class FragmenNewsSports extends BaseFragment<SportsPresenter> implements 
 
         mRvSportsNews.addItemDecoration(new RecycleViewDivider(getActivity(), StaggeredGridLayoutManager.VERTICAL,
                 DensityUtils.dp2px(getActivity(), 15), getResources().getColor(R.color.colorAccent)));
+
+        mRvSportsNews.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void SimpleOnItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(getActivity(), NewsDetailsActivity.class);
+                intent.putExtra("url", list.get(position).getUrl());
+                getActivity().startActivity(intent);
+            }
+        });
     }
 }

@@ -2,6 +2,7 @@ package com.niuyi.mvp_news.mvp.api;
 
 import com.niuyi.mvp_news.bean.DomeNewsBean;
 import com.niuyi.mvp_news.bean.FunnyJokeBean;
+import com.niuyi.mvp_news.bean.FunnyPicBean;
 import com.niuyi.mvp_news.bean.InteNewsBean;
 import com.niuyi.mvp_news.bean.SocietyNewsBean;
 import com.niuyi.mvp_news.bean.SportsNewsBean;
@@ -39,5 +40,8 @@ public interface ApiService {
 
     @GET("content/text.from")
     Observable<FunnyJokeBean> getFunnyJoke(@Query("page") String page, @Query("pagesize") String pagesize, @Query("key") String key);
+
+    @GET("img/text.from")
+    Observable<FunnyPicBean> getFunnyPicture(@Query("page") String page, @Query("pagesize") String pagesize, @Query("key") String key);
 
 }

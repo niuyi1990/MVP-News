@@ -57,7 +57,7 @@ public class FragmentFunnyJoke extends BaseFragment<JokePresenter> implements Jo
 
     @Override
     protected void initView(View view) {
-
+        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_dark);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class FragmentFunnyJoke extends BaseFragment<JokePresenter> implements Jo
     @Override
     public void onRefreshSucceed(List<FunnyJokeBean.ResultBean.DataBean> data) {
         mIvTop.setVisibility(View.VISIBLE);
-        page = 2;//下来刷新成功，初始化为第一页
+        page = 2;//下来刷新成功，初始化为即将加载第二页
         mList = data;
         if (mAdapter == null) {
             initFunnyJokeView();
