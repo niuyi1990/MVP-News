@@ -10,22 +10,22 @@ import com.niuyi.mvp_news.base.BasePresenter;
 
 
 /**
- * 科技
+ * 财经
  * 作者：${牛毅} on 2016/11/30 10:48
  * 邮箱：niuyi19900923@hotmail.com
  */
-public class FragmenTech extends BaseFragment {
+public class FragmenNewsFinancial extends BaseFragment {
 
-    public static FragmenTech newInstance() {
+    public static FragmenNewsFinancial newInstance() {
         Bundle args = new Bundle();
-        FragmenTech fragment = new FragmenTech();
+        FragmenNewsFinancial fragment = new FragmenNewsFinancial();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     protected int bindLayout() {
-        return R.layout.fragment_tech;
+        return R.layout.fragment_financial;
     }
 
     @Override

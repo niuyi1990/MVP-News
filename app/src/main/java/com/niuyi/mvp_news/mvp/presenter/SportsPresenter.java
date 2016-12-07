@@ -1,29 +1,28 @@
 package com.niuyi.mvp_news.mvp.presenter;
 
-import com.niuyi.mvp_news.bean.SocietyNewsBean;
-import com.niuyi.mvp_news.mvp.contract.SocietyContract;
-import com.niuyi.mvp_news.mvp.model.SocietyModel;
-import com.orhanobut.logger.Logger;
+import com.niuyi.mvp_news.bean.SportsNewsBean;
+import com.niuyi.mvp_news.mvp.contract.SportsContract;
+import com.niuyi.mvp_news.mvp.model.SportsModel;
 
 import rx.Subscriber;
 import rx.Subscription;
 
 /**
- * 作者：${牛毅} on 2016/11/30 15:24
+ * 作者：${牛毅} on 2016/12/7 10:10
  * 邮箱：niuyi19900923@hotmail.com
  */
-public class SocietyPresenter extends SocietyContract.Presenter {
+public class SportsPresenter extends SportsContract.Presenter {
 
-    public SocietyPresenter(SocietyContract.View view) {
+    public SportsPresenter(SportsContract.View view) {
         mView = view;
-        mModel = new SocietyModel();
+        mModel = new SportsModel();
     }
 
     @Override
-    public void getSocietyNews() {
+    public void getSportsData() {
 
-        Subscription subscription = mModel.getSocietyNews()
-                .subscribe(new Subscriber<SocietyNewsBean>() {
+        Subscription subscription = mModel.getSportsData()
+                .subscribe(new Subscriber<SportsNewsBean>() {
                     @Override
                     public void onStart() {
                         mView.showRefreshDialog();
@@ -41,8 +40,8 @@ public class SocietyPresenter extends SocietyContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(SocietyNewsBean societyNewsBean) {
-                        mView.onRefreshSucceed(societyNewsBean.getResult().getData());
+                    public void onNext(SportsNewsBean sportsNewsBean) {
+                        mView.onRefreshSucceed(sportsNewsBean.getResult().getData());
                     }
                 });
 
@@ -51,7 +50,6 @@ public class SocietyPresenter extends SocietyContract.Presenter {
 
     @Override
     public void refresh() {
-        getSocietyNews();
+        getSportsData();
     }
-
 }

@@ -19,7 +19,7 @@ public class JokeModel implements JokeContract.Model {
         return ApiEngine
                 .getInstance(Constant.FUNNY_BASE_URL_TYPE)
                 .getApiService()
-                .getFunnyJokeData(String.valueOf(page), "10", Constant.FUNNY_KEY)
+                .getFunnyJoke(String.valueOf(page), "10", Constant.FUNNY_KEY)
                 .compose(RxSchedulers.<FunnyJokeBean>switchThread());
     }
 

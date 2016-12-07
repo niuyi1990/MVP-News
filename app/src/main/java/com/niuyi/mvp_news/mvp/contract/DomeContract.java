@@ -4,7 +4,9 @@ package com.niuyi.mvp_news.mvp.contract;
 import com.niuyi.mvp_news.base.BaseModel;
 import com.niuyi.mvp_news.base.BasePresenter;
 import com.niuyi.mvp_news.base.BaseView;
-import com.niuyi.mvp_news.bean.DomesticNewsBean;
+import com.niuyi.mvp_news.bean.DomeNewsBean;
+
+import java.util.List;
 
 import rx.Observable;
 
@@ -13,25 +15,25 @@ import rx.Observable;
  * 邮箱：niuyi19900923@hotmail.com
  */
 
-public interface DomesticContract {
+public interface DomeContract {
 
     interface View extends BaseView {
 
-        void showDialog();
+        void showRefreshDialog();
 
-        void onSucceed(DomesticNewsBean domesticNewsBean);
+        void onRefreshSucceed(List<DomeNewsBean.ResultBean.DataBean> list);
 
-        void onFail(String err);
+        void onRefreshFail(String err);
 
-        void hideDialog();
+        void hideRefreshDialog();
 
     }
 
     interface Model extends BaseModel {
-        Observable<DomesticNewsBean> getDomesticDate();
+        Observable<DomeNewsBean> getDomesticDate();
     }
 
-    abstract static class Presenter extends BasePresenter<View, Model> {
+    abstract class Presenter extends BasePresenter<View, Model> {
         public abstract void getDomesticDate();
 
         public abstract void refresh();

@@ -3,7 +3,6 @@ package com.niuyi.mvp_news.mvp.presenter;
 import com.niuyi.mvp_news.bean.TopNewsBean;
 import com.niuyi.mvp_news.mvp.contract.TopContract;
 import com.niuyi.mvp_news.mvp.model.TopModel;
-import com.orhanobut.logger.Logger;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -26,27 +25,23 @@ public class TopPresenter extends TopContract.Presenter {
                 .subscribe(new Subscriber<TopNewsBean>() {
                     @Override
                     public void onStart() {
-                        mView.showDialog();
-                        Logger.e("onStart");
+                        mView.showRefreshDialog();
                     }
 
                     @Override
                     public void onCompleted() {
-                        mView.hideDialog();
-                        Logger.e("onCompleted");
+                        mView.hideRefreshDialog();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        mView.onFail(e.getMessage());
+                        mView.onRefreshFail(e.getMessage());
                         onCompleted();
-                        Logger.e("onError" + e.getMessage());
                     }
 
                     @Override
                     public void onNext(TopNewsBean topNewsBean) {
-                        mView.onSucceed(topNewsBean);
-                        Logger.e("onNext ===" + topNewsBean.getResult().getData().size());
+                        mView.onRefreshSucceed(topNewsBean.getResult().getData());
                     }
                 });
 

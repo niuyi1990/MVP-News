@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.view.Window;
 
 import com.niuyi.mvp_news.R;
-import com.niuyi.mvp_news.ui.adapter.MyFragmentPagerAdapter;
+import com.niuyi.mvp_news.ui.adapter.MainFragmentPagerAdapter;
 import com.niuyi.mvp_news.ui.fragment.FragmentMainOne;
 import com.niuyi.mvp_news.ui.fragment.FragmentMainThree;
 import com.niuyi.mvp_news.ui.fragment.FragmentMainTwo;
@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         fragments.add(FragmentMainOne.newInstance());
         fragments.add(FragmentMainTwo.newInstance());
         fragments.add(FragmentMainThree.newInstance());
-        MyFragmentPagerAdapter myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), fragments);
-        mVpMain.setAdapter(myFragmentPagerAdapter);
+        MainFragmentPagerAdapter mainFragmentPagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager(), fragments);
+        mVpMain.setAdapter(mainFragmentPagerAdapter);
 
         mVpMain.setOffscreenPageLimit(2);
     }

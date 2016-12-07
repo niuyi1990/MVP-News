@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * 邮箱：niuyi19900923@hotmail.com
  */
 
-public class InternationalNewsBean {
+public class InteNewsBean {
 
     /**
      * reason : 成功的返回

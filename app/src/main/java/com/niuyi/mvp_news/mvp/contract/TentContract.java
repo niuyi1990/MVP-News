@@ -3,7 +3,9 @@ package com.niuyi.mvp_news.mvp.contract;
 import com.niuyi.mvp_news.base.BaseModel;
 import com.niuyi.mvp_news.base.BasePresenter;
 import com.niuyi.mvp_news.base.BaseView;
-import com.niuyi.mvp_news.bean.TentertainmentNewsBean;
+import com.niuyi.mvp_news.bean.TentNewsBean;
+
+import java.util.List;
 
 import rx.Observable;
 
@@ -11,26 +13,25 @@ import rx.Observable;
  * 作者：${牛毅} on 2016/12/5 16:02
  * 邮箱：niuyi19900923@hotmail.com
  */
-
-public interface TentertainmentContract {
+public interface TentContract {
 
     interface View extends BaseView {
 
-        void showDialog();
+        void showRefreshDialog();
 
-        void onSucceed(TentertainmentNewsBean tentertainmentNewsBean);
+        void onRefreshSucceed(List<TentNewsBean.ResultBean.DataBean> list);
 
-        void onFail(String err);
+        void onRefreshFail(String err);
 
-        void hideDialog();
+        void hideRefreshDialog();
 
     }
 
     interface Model extends BaseModel {
-        Observable<TentertainmentNewsBean> getTentertainmentData();
+        Observable<TentNewsBean> getTentertainmentData();
     }
 
-    abstract static class Presenter extends BasePresenter<View, Model> {
+    abstract class Presenter extends BasePresenter<View, Model> {
         public abstract void getTentertainmentData();
 
         public abstract void refresh();

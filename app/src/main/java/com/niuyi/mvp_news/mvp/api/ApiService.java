@@ -1,10 +1,11 @@
 package com.niuyi.mvp_news.mvp.api;
 
-import com.niuyi.mvp_news.bean.DomesticNewsBean;
+import com.niuyi.mvp_news.bean.DomeNewsBean;
 import com.niuyi.mvp_news.bean.FunnyJokeBean;
-import com.niuyi.mvp_news.bean.InternationalNewsBean;
+import com.niuyi.mvp_news.bean.InteNewsBean;
 import com.niuyi.mvp_news.bean.SocietyNewsBean;
-import com.niuyi.mvp_news.bean.TentertainmentNewsBean;
+import com.niuyi.mvp_news.bean.SportsNewsBean;
+import com.niuyi.mvp_news.bean.TentNewsBean;
 import com.niuyi.mvp_news.bean.TopNewsBean;
 
 import retrofit2.http.GET;
@@ -25,15 +26,18 @@ public interface ApiService {
     Observable<SocietyNewsBean> getSocietyNews(@Query("type") String type, @Query("key") String key);
 
     @GET("index")
-    Observable<DomesticNewsBean> getDomesticNews(@Query("type") String type, @Query("key") String key);
+    Observable<DomeNewsBean> getDomeNews(@Query("type") String type, @Query("key") String key);
 
     @GET("index")
-    Observable<InternationalNewsBean> getInternationalNews(@Query("type") String type, @Query("key") String key);
+    Observable<InteNewsBean> getInteNews(@Query("type") String type, @Query("key") String key);
 
     @GET("index")
-    Observable<TentertainmentNewsBean> getTentertainmentNews(@Query("type") String type, @Query("key") String key);
+    Observable<TentNewsBean> getTentNews(@Query("type") String type, @Query("key") String key);
+
+    @GET("index")
+    Observable<SportsNewsBean> getSportsNews(@Query("type") String type, @Query("key") String key);
 
     @GET("content/text.from")
-    Observable<FunnyJokeBean> getFunnyJokeData(@Query("page") String page,@Query("pagesize") String pagesize, @Query("key") String key);
+    Observable<FunnyJokeBean> getFunnyJoke(@Query("page") String page, @Query("pagesize") String pagesize, @Query("key") String key);
 
 }

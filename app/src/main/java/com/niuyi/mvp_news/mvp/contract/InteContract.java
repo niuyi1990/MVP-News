@@ -4,7 +4,9 @@ package com.niuyi.mvp_news.mvp.contract;
 import com.niuyi.mvp_news.base.BaseModel;
 import com.niuyi.mvp_news.base.BasePresenter;
 import com.niuyi.mvp_news.base.BaseView;
-import com.niuyi.mvp_news.bean.InternationalNewsBean;
+import com.niuyi.mvp_news.bean.InteNewsBean;
+
+import java.util.List;
 
 import rx.Observable;
 
@@ -14,25 +16,25 @@ import rx.Observable;
  * 邮箱：niuyi19900923@hotmail.com
  */
 
-public interface InternationalContract {
+public interface InteContract {
 
-     interface View extends BaseView {
+    interface View extends BaseView {
 
-        void showDialog();
+        void showRefreshDialog();
 
-        void onSucceed(InternationalNewsBean domesticNewsBean);
+        void onRefreshSucceed(List<InteNewsBean.ResultBean.DataBean> list);
 
-        void onFail(String err);
+        void onRefreshFail(String err);
 
-        void hideDialog();
+        void hideRefreshDialog();
 
     }
 
     interface Model extends BaseModel {
-        Observable<InternationalNewsBean> getInternationData();
+        Observable<InteNewsBean> getInternationData();
     }
 
-    abstract static class Presenter extends BasePresenter<View, Model> {
+    abstract class Presenter extends BasePresenter<View, Model> {
         public abstract void getInternationData();
 
         public abstract void refresh();

@@ -6,21 +6,19 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-/**
- * Created by HongJay on 2016/8/11.
- */
-public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
+public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
+
     private String[] mTitles = new String[]{"Tab 1", "Tab 2", "Tab 3"};
     private List<Fragment> fragments;
-    public MyFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+
+    public MainFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
-        this.fragments=fragments;
+        this.fragments = fragments;
     }
 
     @Override
     public Fragment getItem(int position) {
         return fragments.get(position);
-
     }
 
     @Override

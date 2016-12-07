@@ -9,23 +9,22 @@ import com.niuyi.mvp_news.base.BaseFragment;
 import com.niuyi.mvp_news.base.BasePresenter;
 
 /**
- * 科技
+ * 时尚
  * 作者：${牛毅} on 2016/11/30 10:48
  * 邮箱：niuyi19900923@hotmail.com
  */
-public class FragmenSports extends BaseFragment {
+public class FragmenNewsFashion extends BaseFragment {
 
-
-    public static FragmenSports newInstance() {
+    public static FragmenNewsFashion newInstance() {
         Bundle args = new Bundle();
-        FragmenSports fragment = new FragmenSports();
+        FragmenNewsFashion fragment = new FragmenNewsFashion();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     protected int bindLayout() {
-        return R.layout.fragment_sports;
+        return R.layout.fragment_fashion;
     }
 
     @Override

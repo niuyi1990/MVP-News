@@ -8,23 +8,24 @@ import com.niuyi.mvp_news.R;
 import com.niuyi.mvp_news.base.BaseFragment;
 import com.niuyi.mvp_news.base.BasePresenter;
 
+
 /**
- * 时尚
+ * 军事
  * 作者：${牛毅} on 2016/11/30 10:48
  * 邮箱：niuyi19900923@hotmail.com
  */
-public class FragmenFashion extends BaseFragment {
+public class FragmenNewsMilitary extends BaseFragment {
 
-    public static FragmenFashion newInstance() {
+    public static FragmenNewsMilitary newInstance() {
         Bundle args = new Bundle();
-        FragmenFashion fragment = new FragmenFashion();
+        FragmenNewsMilitary fragment = new FragmenNewsMilitary();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     protected int bindLayout() {
-        return R.layout.fragment_fashion;
+        return R.layout.fragment_military;
     }
 
     @Override
