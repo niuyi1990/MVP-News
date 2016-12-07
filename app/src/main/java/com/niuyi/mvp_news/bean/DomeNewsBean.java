@@ -6,7 +6,6 @@ import java.util.ArrayList;
  * 作者：${牛毅} on 2016/12/2 10:31
  * 邮箱：niuyi19900923@hotmail.com
  */
-
 public class DomeNewsBean {
 
     /**
