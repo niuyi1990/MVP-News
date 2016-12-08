@@ -64,12 +64,12 @@ public class FragmentNewsDome extends BaseFragment<DomePresenter> implements Dom
 
     @Override
     protected void toDo(Context mContext) {
-        mPresenter.getDomesticDate();
+
     }
 
     @Override
-    protected void loadData() {
-
+    protected void lazyLoadData() {
+        mPresenter.getDomesticDate();
     }
 
     @Override

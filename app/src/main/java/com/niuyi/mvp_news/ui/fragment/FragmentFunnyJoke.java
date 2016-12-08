@@ -17,6 +17,7 @@ import com.niuyi.mvp_news.mvp.presenter.JokePresenter;
 import com.niuyi.mvp_news.ui.adapter.FunnyJokeAdapter;
 import com.niuyi.mvp_news.ui.widght.CustomLoadMoreView;
 import com.niuyi.mvp_news.utils.ToastUtil;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,12 +68,12 @@ public class FragmentFunnyJoke extends BaseFragment<JokePresenter> implements Jo
 
     @Override
     protected void toDo(Context mContext) {
-        mPresenter.refresh();
+
     }
 
     @Override
-    protected void loadData() {
-
+    protected void lazyLoadData() {
+        mPresenter.refresh();
     }
 
     @Override

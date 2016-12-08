@@ -64,12 +64,12 @@ public class FragmenNewsSports extends BaseFragment<SportsPresenter> implements 
 
     @Override
     protected void toDo(Context mContext) {
-        mPresenter.getSportsData();
+
     }
 
     @Override
-    protected void loadData() {
-
+    protected void lazyLoadData() {
+        mPresenter.getSportsData();
     }
 
     @Override

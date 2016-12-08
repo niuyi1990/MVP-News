@@ -71,11 +71,6 @@ public class FragmentMainOne extends BaseFragment {
     }
 
     @Override
-    protected void loadData() {
-
-    }
-
-    @Override
     protected BasePresenter onCreatePresenter() {
         return null;
     }

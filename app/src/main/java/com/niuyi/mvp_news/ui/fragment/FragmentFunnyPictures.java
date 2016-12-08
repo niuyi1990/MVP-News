@@ -68,12 +68,12 @@ public class FragmentFunnyPictures extends BaseFragment<PicturePresenter> implem
 
     @Override
     protected void toDo(Context mContext) {
-        mPresenter.refresh();
+
     }
 
     @Override
-    protected void loadData() {
-
+    protected void lazyLoadData() {
+        mPresenter.refresh();
     }
 
     @Override

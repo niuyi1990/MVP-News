@@ -44,7 +44,7 @@ public class FragmenNewsFinancial extends BaseFragment {
     }
 
     @Override
-    protected void loadData() {
+    protected void lazyLoadData() {
 
     }
 

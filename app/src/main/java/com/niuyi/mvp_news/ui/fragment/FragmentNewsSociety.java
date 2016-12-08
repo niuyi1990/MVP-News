@@ -21,6 +21,7 @@ import com.niuyi.mvp_news.ui.adapter.NewsSocietyAdapter;
 import com.niuyi.mvp_news.ui.widght.RecycleViewDivider;
 import com.niuyi.mvp_news.utils.DensityUtils;
 import com.niuyi.mvp_news.utils.ToastUtil;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -64,12 +65,12 @@ public class FragmentNewsSociety extends BaseFragment<SocietyPresenter> implemen
 
     @Override
     protected void toDo(Context mContext) {
-        mPresenter.getSocietyNews();
+
     }
 
     @Override
-    protected void loadData() {
-
+    protected void lazyLoadData() {
+        mPresenter.getSocietyNews();
     }
 
     @Override

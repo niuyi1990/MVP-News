@@ -2,10 +2,13 @@ package com.niuyi.mvp_news.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.orhanobut.logger.Logger;
 
 import butterknife.ButterKnife;
 
@@ -18,9 +21,27 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
 
     private View mContextView = null;//当前Fragment渲染的视图View
 
-    protected boolean isVisible;//页面是否可见
-
     protected P mPresenter;
+
+    protected Context mContext;
+
+    private boolean mIsViewPrepared; // 标识fragment视图已经初始化完毕
+    private boolean mHasLoadData; // 标识已经触发过懒加载数据
+
+    @Override
+    public void onAttach(Context mContext) {
+        super.onAttach(mContext);
+        if (mContext != null) {
+            this.mContext = mContext;
+        } else {
+            this.mContext = getActivity();
+        }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +54,41 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
         toDo(getActivity());//业务处理
         setListener(getActivity());//设置监听
         return mContextView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mIsViewPrepared = true;
+        lazyLoadDataIfPrepared();
+    }
+
+    private void lazyLoadDataIfPrepared() {
+        // 用户可见fragment && 没有加载过数据 && 视图已经准备完毕
+        Logger.e("getUserVisibleHint===" + getUserVisibleHint());
+        Logger.e("!mHasLoadData " + !mHasLoadData);
+        Logger.e("mIsViewPrepared" + mIsViewPrepared);
+        if (getUserVisibleHint() && !mHasLoadData && mIsViewPrepared) {
+            mHasLoadData = true;
+            lazyLoadData();
+        }
+
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            lazyLoadDataIfPrepared();
+        }
+    }
+
+    /**
+     * 懒加载的方式获取数据，
+     * 仅在满足fragment可见和视图已经准备好,并且数据没有加载的时候调用一次
+     */
+    protected void lazyLoadData() {
+
     }
 
     /**
@@ -59,40 +115,11 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
      */
     protected abstract void toDo(Context mContext);
 
-    /**
-     * 页面可见并且控件初始化完毕时，加载设置数据
-     */
-    protected abstract void loadData();
-
-    /**
-     * 页面不可见 ，失去焦点，相当于Fragment的onPause
-     */
-    protected void onInvisible() {
-
-    }
-
-    /**
-     * 页面可见 ，获得焦点，相当于Fragment的onResume
-     */
-    protected void onVisible() {
-        loadData();
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (getUserVisibleHint()) {
-            isVisible = true;
-            onVisible();
-        } else {
-            isVisible = false;
-            onInvisible();
-        }
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mHasLoadData = false;
+        mIsViewPrepared = false;
         if (mPresenter != null) {
             mPresenter.unSubscribe();
         }
@@ -104,6 +131,5 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
      * @return
      */
     protected abstract P onCreatePresenter();
-
 
 }

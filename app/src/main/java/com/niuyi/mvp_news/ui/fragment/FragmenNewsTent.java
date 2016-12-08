@@ -64,12 +64,12 @@ public class FragmenNewsTent extends BaseFragment<TentPresenter> implements Tent
 
     @Override
     protected void toDo(Context mContext) {
-        mPresenter.getTentertainmentData();
+
     }
 
     @Override
-    protected void loadData() {
-
+    protected void lazyLoadData() {
+        mPresenter.getTentertainmentData();
     }
 
     @Override

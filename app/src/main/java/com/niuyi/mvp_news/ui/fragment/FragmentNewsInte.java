@@ -64,12 +64,12 @@ public class FragmentNewsInte extends BaseFragment<IntePresenter> implements Int
 
     @Override
     protected void toDo(Context mContext) {
-        mPresenter.getInternationData();
+
     }
 
     @Override
-    protected void loadData() {
-
+    protected void lazyLoadData() {
+        mPresenter.getInternationData();
     }
 
     @Override

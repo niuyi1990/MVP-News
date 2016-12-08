@@ -16,9 +16,9 @@ public class RxSchedulers {
             @Override
             public Observable<T> call(Observable<T> tObservable) {
                 return tObservable
-                        .subscribeOn(Schedulers.io())
+                        .subscribeOn(Schedulers.io()) //在IO线程进行网络请求
                         .unsubscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
+                        .observeOn(AndroidSchedulers.mainThread()); //回到主线程去处理请求结果
             }
         };
     }

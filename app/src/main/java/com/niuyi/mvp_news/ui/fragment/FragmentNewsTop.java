@@ -64,12 +64,12 @@ public class FragmentNewsTop extends BaseFragment<TopPresenter> implements TopCo
 
     @Override
     protected void toDo(Context mContext) {
-        mPresenter.getTopNews();
+
     }
 
     @Override
-    protected void loadData() {
-
+    protected void lazyLoadData() {
+        mPresenter.getTopNews();
     }
 
     @Override
