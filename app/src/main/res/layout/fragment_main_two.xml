@@ -15,7 +15,7 @@
         app:tabTextAppearance="@style/MyCustomTabTextAppearance"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@android:color/white"
-        app:tabTextColor="#97c8f4"/>
+        app:tabTextColor="#99ffff"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_fun_pager"

@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.orhanobut.logger.Logger;
-
 import butterknife.ButterKnife;
 
 /**
@@ -65,14 +63,10 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
 
     private void lazyLoadDataIfPrepared() {
         // 用户可见fragment && 没有加载过数据 && 视图已经准备完毕
-        Logger.e("getUserVisibleHint===" + getUserVisibleHint());
-        Logger.e("!mHasLoadData " + !mHasLoadData);
-        Logger.e("mIsViewPrepared" + mIsViewPrepared);
         if (getUserVisibleHint() && !mHasLoadData && mIsViewPrepared) {
             mHasLoadData = true;
             lazyLoadData();
         }
-
     }
 
     @Override

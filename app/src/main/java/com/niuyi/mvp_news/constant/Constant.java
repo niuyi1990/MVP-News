@@ -23,7 +23,7 @@ public class Constant {
 //    public static final int NEWS_BASE_URL_TYPE = 1;
 
     public static final String ROOT = Environment.getExternalStorageDirectory().getPath();
-    public static final String SHISHIBAO_PATH = ROOT + "/ShiShiBao/";
+    public static final String SHISHIBAO_PATH = ROOT + "/SSBNEWS/";
     public static final String IMAGES_PATH = SHISHIBAO_PATH + "images/";
     public static final String CACHE_PATH = SHISHIBAO_PATH + "cache/";
 }

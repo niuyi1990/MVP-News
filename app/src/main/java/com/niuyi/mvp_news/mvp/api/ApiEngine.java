@@ -35,7 +35,7 @@ public class ApiEngine {
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(10, TimeUnit.SECONDS)
                 .addNetworkInterceptor(new NetworkInterceptor())
                 .addInterceptor(loggingInterceptor)
                 .cache(cache)
