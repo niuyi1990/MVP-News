@@ -1,28 +1,28 @@
 package com.niuyi.mvp_news.mvp.presenter;
 
-import com.niuyi.mvp_news.bean.InteNewsBean;
-import com.niuyi.mvp_news.mvp.contract.InteContract;
-import com.niuyi.mvp_news.mvp.model.InteModel;
+import com.niuyi.mvp_news.bean.NewsBean;
+import com.niuyi.mvp_news.mvp.contract.NewsContract;
+import com.niuyi.mvp_news.mvp.model.NewsModel;
 
 import rx.Subscriber;
 import rx.Subscription;
 
 /**
- * 作者：${牛毅} on 2016/12/2 11:11
+ * 作者：${牛毅} on 2016/11/30 15:24
  * 邮箱：niuyi19900923@hotmail.com
  */
-public class IntePresenter extends InteContract.Presenter {
+public class NewsPresenter extends NewsContract.Presenter {
 
-    public IntePresenter(InteContract.View view) {
+    public NewsPresenter(NewsContract.View view) {
         mView = view;
-        mModel = new InteModel();
+        mModel = new NewsModel();
     }
 
     @Override
-    public void getInternationData() {
+    public void getSocietyNews(String type) {
 
-        Subscription subscription = mModel.getInternationData()
-                .subscribe(new Subscriber<InteNewsBean>() {
+        Subscription subscription = mModel.getSocietyNews(type)
+                .subscribe(new Subscriber<NewsBean>() {
                     @Override
                     public void onStart() {
                         mView.showRefreshDialog();
@@ -40,17 +40,17 @@ public class IntePresenter extends InteContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(InteNewsBean internationalNewsBean) {
-                        mView.onRefreshSucceed(internationalNewsBean.getResult().getData());
+                    public void onNext(NewsBean societyNewsBean) {
+                        mView.onRefreshSucceed(societyNewsBean.getResult().getData());
                     }
                 });
-        addSubscribe(subscription);
 
+        addSubscribe(subscription);
     }
 
     @Override
-    public void refresh() {
-        getInternationData();
+    public void refresh(String type) {
+        getSocietyNews(type);
     }
 
 }

@@ -1,25 +1,26 @@
 package com.niuyi.mvp_news.mvp.contract;
 
+
 import com.niuyi.mvp_news.base.BaseModel;
 import com.niuyi.mvp_news.base.BasePresenter;
 import com.niuyi.mvp_news.base.BaseView;
-import com.niuyi.mvp_news.bean.SportsNewsBean;
+import com.niuyi.mvp_news.bean.NewsBean;
 
 import java.util.List;
 
 import rx.Observable;
 
 /**
- * 作者：${牛毅} on 2016/12/7 10:04
+ * 作者：${牛毅} on 2016/11/30 15:20
  * 邮箱：niuyi19900923@hotmail.com
  */
-public interface SportsContract {
+public interface NewsContract {
 
     interface View extends BaseView {
 
         void showRefreshDialog();
 
-        void onRefreshSucceed(List<SportsNewsBean.ResultBean.DataBean> list);
+        void onRefreshSucceed(List<NewsBean.ResultBean.DataBean> list);
 
         void onRefreshFail(String err);
 
@@ -28,12 +29,12 @@ public interface SportsContract {
     }
 
     interface Model extends BaseModel {
-        Observable<SportsNewsBean> getSportsData();
+        Observable<NewsBean> getSocietyNews(String type);
     }
 
     abstract class Presenter extends BasePresenter<View, Model> {
-        public abstract void getSportsData();
+        public abstract void getSocietyNews(String string);
 
-        public abstract void refresh();
+        public abstract void refresh(String string);
     }
 }

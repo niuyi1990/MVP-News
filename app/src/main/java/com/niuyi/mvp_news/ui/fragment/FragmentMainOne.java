@@ -83,16 +83,16 @@ public class FragmentMainOne extends BaseFragment {
     private void initTab() {
         List<Fragment> fragmentList = new ArrayList<>();
 
-        fragmentList.add(FragmentNewsTop.newInstance());
-        fragmentList.add(FragmentNewsSociety.newInstance());
-        fragmentList.add(FragmentNewsDome.newInstance());
-        fragmentList.add(FragmentNewsInte.newInstance());
-        fragmentList.add(FragmenNewsTent.newInstance());
-        fragmentList.add(FragmenNewsSports.newInstance());
-        fragmentList.add(FragmenNewsMilitary.newInstance());
-        fragmentList.add(FragmenNewsTech.newInstance());
-        fragmentList.add(FragmenNewsFinancial.newInstance());
-        fragmentList.add(FragmenNewsFashion.newInstance());
+        fragmentList.add(FragmentNews.newInstance("top"));
+        fragmentList.add(FragmentNews.newInstance("shehui"));
+        fragmentList.add(FragmentNews.newInstance("guonei"));
+        fragmentList.add(FragmentNews.newInstance("guoji"));
+        fragmentList.add(FragmentNews.newInstance("yule"));
+        fragmentList.add(FragmentNews.newInstance("tiyu"));
+        fragmentList.add(FragmentNews.newInstance("junshi"));
+        fragmentList.add(FragmentNews.newInstance("keji"));
+        fragmentList.add(FragmentNews.newInstance("caijing"));
+        fragmentList.add(FragmentNews.newInstance("shishang"));
 
         TabFragmentPagerAdapter mTabFragmentPagerAdapter = new TabFragmentPagerAdapter(
                 getActivity().getSupportFragmentManager(), fragmentList, mTitles);
