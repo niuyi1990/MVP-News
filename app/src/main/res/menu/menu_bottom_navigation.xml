@@ -11,6 +11,6 @@
 
     <item
         android:id="@+id/item_person"
-        android:icon="@mipmap/ic_move"
-        android:title="电影"/>
+        android:icon="@mipmap/ic_weixin"
+        android:title="精选"/>
 </menu>

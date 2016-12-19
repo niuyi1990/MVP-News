@@ -44,4 +44,6 @@ public interface ApiService {
     @GET("img/text.from")
     Observable<FunnyPicBean> getFunnyPicture(@Query("page") String page, @Query("pagesize") String pagesize, @Query("key") String key);
 
+    @GET("query")
+    Observable<FunnyPicBean> getWeiXinData(@Query("pno") String pno, @Query("ps") String ps, @Query("dtype") String dtype, @Query("key") String key);
 }

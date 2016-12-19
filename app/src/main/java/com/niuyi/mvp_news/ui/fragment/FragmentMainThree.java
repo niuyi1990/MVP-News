@@ -37,7 +37,7 @@ public class FragmentMainThree extends BaseFragment implements SwipeRefreshLayou
 
     @Override
     protected void initView(View view) {
-        initTab();
+
     }
 
     @Override
@@ -57,10 +57,6 @@ public class FragmentMainThree extends BaseFragment implements SwipeRefreshLayou
 
     @Override
     public void onRefresh() {
-
-    }
-
-    private void initTab() {
 
     }
 

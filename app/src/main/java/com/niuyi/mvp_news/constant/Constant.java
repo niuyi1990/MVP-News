@@ -11,16 +11,22 @@ public class Constant {
 
     public static final String NEWS_KEY = "c0a832d7e26bc6a5966ea6bf2e0709c7";//新闻
     public static final String FUNNY_KEY = "f1ae70464060d564cd5e8220c39089e8";//段子
+    public static final String WEIXIN_KEY = "b1a38cfdcc800b433f1abd315f545172";//微信精选
 
     //新闻请求示例：http://v.juhe.cn/toutiao/index?type=top&key=APPKEY
     public static final String NEWS_BASE_URL = "http://v.juhe.cn/toutiao/";//必须以‘/’结尾
+
     //笑话接口地址：http://japi.juhe.cn/joke/content/text.from?key=您申请的KEY&page=1&pagesize=10
     //趣图接口地址：http://japi.juhe.cn/joke/img/text.from?key=您申请的KEY&page=1&pagesize=10
-    public static final String FUNNY_BASE_URL = "http://japi.juhe.cn/joke/";//必须以‘/’结尾
+    public static final String FUNNY_BASE_URL = "http://japi.juhe.cn/joke/";
+
+    //微信精选 请求示例：http://v.juhe.cn/weixin/query?key=您申请的KEY&pno=1&ps=10&dtype=json
+    public static final String WEIXIN_BASE_URL = "http://v.juhe.cn/weixin/";
+
 
     public static final int NEWS_BASE_URL_TYPE = 1;
     public static final int FUNNY_BASE_URL_TYPE = 2;
-//    public static final int NEWS_BASE_URL_TYPE = 1;
+    public static final int WEIXIN_BASE_URL_TYPE = 3;
 
     public static final String ROOT = Environment.getExternalStorageDirectory().getPath();
     public static final String SHISHIBAO_PATH = ROOT + "/SSBNEWS/";
