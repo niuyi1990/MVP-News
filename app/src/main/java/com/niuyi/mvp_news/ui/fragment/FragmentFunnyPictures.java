@@ -6,7 +6,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.niuyi.mvp_news.R;
@@ -16,13 +15,14 @@ import com.niuyi.mvp_news.mvp.contract.PictureContract;
 import com.niuyi.mvp_news.mvp.presenter.PicturePresenter;
 import com.niuyi.mvp_news.ui.adapter.FunnyPicAdapter;
 import com.niuyi.mvp_news.ui.widght.CustomLoadMoreView;
+import com.niuyi.mvp_news.ui.widght.SpacesItemDecoration;
+import com.niuyi.mvp_news.utils.DensityUtils;
 import com.niuyi.mvp_news.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 作者：${牛毅} on 2016/12/6 11:19
@@ -35,8 +35,6 @@ public class FragmentFunnyPictures extends BaseFragment<PicturePresenter> implem
     RecyclerView mRvFunnyPicture;
     @BindView(R.id.swipeLayout)
     SwipeRefreshLayout mSwipeLayout;
-    @BindView(R.id.iv_top)
-    ImageView mIvTop;
 
     private FunnyPicAdapter mFunnyPicAdapter;
 
@@ -58,7 +56,7 @@ public class FragmentFunnyPictures extends BaseFragment<PicturePresenter> implem
 
     @Override
     protected void initView(View view) {
-        mSwipeLayout.setColorSchemeResources(android.R.color.holo_red_dark);
+        mSwipeLayout.setColorSchemeResources(R.color.colorPrimary);
     }
 
     @Override
@@ -86,11 +84,6 @@ public class FragmentFunnyPictures extends BaseFragment<PicturePresenter> implem
         mPresenter.refresh();
     }
 
-    @OnClick(R.id.iv_top)
-    public void onClick() {
-        mRvFunnyPicture.smoothScrollToPosition(0);
-    }
-
     @Override
     public void showRefreshDialog() {
         mSwipeLayout.setRefreshing(true);
@@ -103,7 +96,6 @@ public class FragmentFunnyPictures extends BaseFragment<PicturePresenter> implem
 
     @Override
     public void onRefreshSucceed(List<FunnyPicBean.ResultBean.DataBean> list) {
-        mIvTop.setVisibility(View.VISIBLE);
         page = 2;
         mList = list;
         if (mFunnyPicAdapter == null) {
@@ -115,7 +107,6 @@ public class FragmentFunnyPictures extends BaseFragment<PicturePresenter> implem
 
     @Override
     public void onRefreshFail(String err) {
-        mIvTop.setVisibility(View.GONE);
         ToastUtil.showToast(getActivity(), getString(R.string.loading_fail));
     }
 
@@ -145,5 +136,7 @@ public class FragmentFunnyPictures extends BaseFragment<PicturePresenter> implem
 //        mFunnyPicAdapter.setAutoLoadMoreSize(3);//距离底布多少item预加载
         mRvFunnyPicture.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvFunnyPicture.setAdapter(mFunnyPicAdapter);
+
+        mRvFunnyPicture.addItemDecoration(new SpacesItemDecoration(DensityUtils.dp2px(getActivity(), 15f)));
     }
 }

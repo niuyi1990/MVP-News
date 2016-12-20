@@ -18,7 +18,7 @@ import java.util.List;
 public class NewsAdapter extends BaseQuickAdapter<NewsBean.ResultBean.DataBean, BaseViewHolder> {
 
     public NewsAdapter(List<NewsBean.ResultBean.DataBean> data) {
-        super(R.layout.item_top, data);
+        super(R.layout.item_news, data);
     }
 
     @Override

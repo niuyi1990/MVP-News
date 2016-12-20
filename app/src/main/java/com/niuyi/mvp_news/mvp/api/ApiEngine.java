@@ -60,8 +60,8 @@ public class ApiEngine {
             case 2://段子
                 mBaseUrl = Constant.FUNNY_BASE_URL;
                 break;
-            case 3://电影
-
+            case 3://微信
+                mBaseUrl = Constant.WEIXIN_BASE_URL;
                 break;
         }
 

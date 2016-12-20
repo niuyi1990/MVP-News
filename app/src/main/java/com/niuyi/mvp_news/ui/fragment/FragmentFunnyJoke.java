@@ -6,7 +6,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.niuyi.mvp_news.R;
@@ -16,14 +15,14 @@ import com.niuyi.mvp_news.mvp.contract.JokeContract;
 import com.niuyi.mvp_news.mvp.presenter.JokePresenter;
 import com.niuyi.mvp_news.ui.adapter.FunnyJokeAdapter;
 import com.niuyi.mvp_news.ui.widght.CustomLoadMoreView;
+import com.niuyi.mvp_news.ui.widght.SpacesItemDecoration;
+import com.niuyi.mvp_news.utils.DensityUtils;
 import com.niuyi.mvp_news.utils.ToastUtil;
-import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 作者：${牛毅} on 2016/12/6 11:19
@@ -36,8 +35,6 @@ public class FragmentFunnyJoke extends BaseFragment<JokePresenter> implements Jo
     RecyclerView mRvFunnyJoke;
     @BindView(R.id.swipeLayout)
     SwipeRefreshLayout mSwipeLayout;
-    @BindView(R.id.iv_top)
-    ImageView mIvTop;
 
     private int page = 2;//上拉加载从当前二页开始
 
@@ -58,7 +55,7 @@ public class FragmentFunnyJoke extends BaseFragment<JokePresenter> implements Jo
 
     @Override
     protected void initView(View view) {
-        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_dark);
+        mSwipeLayout.setColorSchemeResources(R.color.colorPrimary);
     }
 
     @Override
@@ -88,7 +85,6 @@ public class FragmentFunnyJoke extends BaseFragment<JokePresenter> implements Jo
 
     @Override
     public void onRefreshSucceed(List<FunnyJokeBean.ResultBean.DataBean> data) {
-        mIvTop.setVisibility(View.VISIBLE);
         page = 2;//下来刷新成功，初始化为即将加载第二页
         mList = data;
         if (mAdapter == null) {
@@ -100,7 +96,6 @@ public class FragmentFunnyJoke extends BaseFragment<JokePresenter> implements Jo
 
     @Override
     public void onRefreshFail(String err) {
-        mIvTop.setVisibility(View.GONE);
         ToastUtil.showToast(getActivity(), getString(R.string.loading_fail));
     }
 
@@ -132,11 +127,6 @@ public class FragmentFunnyJoke extends BaseFragment<JokePresenter> implements Jo
         mPresenter.loadmore(page);
     }
 
-    @OnClick(R.id.iv_top)
-    public void onClick() {//快速滑倒顶部
-        mRvFunnyJoke.smoothScrollToPosition(0);
-    }
-
     private void initFunnyJokeView() {
         mAdapter = new FunnyJokeAdapter(mList);
         mAdapter.setOnLoadMoreListener(this);
@@ -145,5 +135,7 @@ public class FragmentFunnyJoke extends BaseFragment<JokePresenter> implements Jo
 //        mAdapter.setAutoLoadMoreSize(3);//距离底布多少item预加载
         mRvFunnyJoke.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvFunnyJoke.setAdapter(mAdapter);
+
+        mRvFunnyJoke.addItemDecoration(new SpacesItemDecoration(DensityUtils.dp2px(getActivity(), 15f)));
     }
 }

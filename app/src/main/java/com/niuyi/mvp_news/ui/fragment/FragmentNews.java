@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -18,7 +17,7 @@ import com.niuyi.mvp_news.mvp.contract.NewsContract;
 import com.niuyi.mvp_news.mvp.presenter.NewsPresenter;
 import com.niuyi.mvp_news.ui.activity.NewsDetailsActivity;
 import com.niuyi.mvp_news.ui.adapter.NewsAdapter;
-import com.niuyi.mvp_news.ui.widght.RecycleViewDivider;
+import com.niuyi.mvp_news.ui.widght.SpacesItemDecoration;
 import com.niuyi.mvp_news.utils.DensityUtils;
 import com.niuyi.mvp_news.utils.ToastUtil;
 
@@ -57,7 +56,7 @@ public class FragmentNews extends BaseFragment<NewsPresenter> implements NewsCon
 
     @Override
     protected void initView(View view) {
-        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright);
+        mSwipeLayout.setColorSchemeResources(R.color.colorPrimary);
     }
 
     @Override
@@ -115,8 +114,7 @@ public class FragmentNews extends BaseFragment<NewsPresenter> implements NewsCon
         mRvTopNews.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRvTopNews.setAdapter(mNewsAdapter);
 
-        mRvTopNews.addItemDecoration(new RecycleViewDivider(getActivity(), StaggeredGridLayoutManager.VERTICAL,
-                DensityUtils.dp2px(getActivity(), 15), getResources().getColor(R.color.colorAccent)));
+        mRvTopNews.addItemDecoration(new SpacesItemDecoration(DensityUtils.dp2px(getActivity(), 15f)));
 
         mRvTopNews.addOnItemTouchListener(new OnItemClickListener() {
             @Override

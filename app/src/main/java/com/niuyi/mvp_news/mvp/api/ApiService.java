@@ -3,6 +3,7 @@ package com.niuyi.mvp_news.mvp.api;
 import com.niuyi.mvp_news.bean.FunnyJokeBean;
 import com.niuyi.mvp_news.bean.FunnyPicBean;
 import com.niuyi.mvp_news.bean.NewsBean;
+import com.niuyi.mvp_news.bean.WeiXinBean;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -25,5 +26,5 @@ public interface ApiService {
     Observable<FunnyPicBean> getFunnyPicture(@Query("page") String page, @Query("pagesize") String pagesize, @Query("key") String key);
 
     @GET("query")
-    Observable<FunnyPicBean> getWeiXinData(@Query("pno") String pno, @Query("ps") String ps, @Query("dtype") String dtype, @Query("key") String key);
+    Observable<WeiXinBean> getWeiXinData(@Query("pno") String pno, @Query("ps") String ps, @Query("dtype") String dtype, @Query("key") String key);
 }

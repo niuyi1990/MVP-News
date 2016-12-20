@@ -21,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.activity.NewsDetailsActivity"
             android:label="详情"
@@ -30,6 +29,11 @@
         <activity
             android:name=".ui.activity.PhotoViewActivity"
             android:theme="@style/AppTheme.NoActionBar.Fullscreeen">
+        </activity>
+        <activity
+            android:name=".ui.activity.WeiXinDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="精选详情">
         </activity>
     </application>
 
